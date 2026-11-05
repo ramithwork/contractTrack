@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1613"/>
+      <stop offset="50%" stop-color="#120e0b"/>
+      <stop offset="100%" stop-color="#0a0807"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e1a4"/>
+      <stop offset="35%" stop-color="#d4af37"/>
+      <stop offset="70%" stop-color="#aa8222"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </linearGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Outer luxury background with border -->
+  <rect width="512" height="512" rx="96" fill="url(#bgGrad)"/>
+  <rect x="16" y="16" width="480" height="480" rx="80" fill="none" stroke="url(#goldGrad)" stroke-width="3" stroke-opacity="0.6"/>
+  <rect x="28" y="28" width="456" height="456" rx="68" fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="6,4"/>
+
+  <!-- Ornate Kandyan Hotel Crown Motif -->
+  <g transform="translate(256, 175) scale(0.95)" filter="url(#goldGlow)">
+    <!-- Top Finial -->
+    <path d="M0 -75 L14 -45 L-14 -45 Z" fill="url(#goldGrad)" />
+    <circle cx="0" cy="-80" r="5" fill="url(#goldGrad)" />
+    
+    <!-- Royal Kandyan Arch -->
+    <path d="M-80 -25 C-45 -65 45 -65 80 -25 C50 -30 20 -45 0 -45 C-20 -45 -50 -30 -80 -25 Z" fill="url(#goldGrad)" />
+    
+    <!-- Heraldic Crest Scrolls & Peacock Silhouette Flourish -->
+    <path d="M-110 30 C-140 -20 -90 -45 -50 -30 C-75 -15 -90 10 -65 35 C-45 55 -20 50 0 60 C20 50 45 55 65 35 C90 10 75 -15 50 -30 C90 -45 140 -20 110 30 C85 75 25 85 0 95 C-25 85 -85 75 -110 30 Z" fill="none" stroke="url(#goldGrad)" stroke-width="7" stroke-linecap="round"/>
+    
+    <!-- Traditional Kandyan Jewelry Drop -->
+    <circle cx="0" cy="20" r="14" fill="url(#goldGrad)" />
+    <path d="M0 20 C-12 40 -12 60 0 75 C12 60 12 40 0 20 Z" fill="url(#goldGrad)" />
+  </g>
+
+  <!-- Typography -->
+  <text x="256" y="325" text-anchor="middle" font-family="'Cinzel', 'Playfair Display', 'Times New Roman', Georgia, serif" font-size="28" font-style="italic" fill="#f5e1a4" letter-spacing="2">The</text>
+  <text x="256" y="365" text-anchor="middle" font-family="'Cinzel', 'Playfair Display', 'Times New Roman', Georgia, serif" font-weight="700" font-size="34" fill="url(#goldGrad)" letter-spacing="4">GRAND KANDYAN</text>
+  <text x="256" y="398" text-anchor="middle" font-family="'Cinzel', 'Playfair Display', 'Times New Roman', Georgia, serif" font-size="20" font-style="italic" fill="#e6ca85" letter-spacing="6">HOTEL</text>
+
+  <!-- Subtitle Ribbon -->
+  <line x1="140" y1="425" x2="372" y2="425" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.8"/>
+  <circle cx="256" cy="425" r="4" fill="url(#goldGrad)"/>
+  <text x="256" y="445" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#c5a059" letter-spacing="3">CONTRACT MANAGEMENT</text>
+</svg>

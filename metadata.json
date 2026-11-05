@@ -1,0 +1,6 @@
+{
+  "name": "The Grand Kandyan - Contract Management System",
+  "description": "PWA Contract & Renewal Management Portal for The Grand Kandyan Hotel with department-based access control and renewal notifications.",
+  "requestFramePermissions": ["notifications"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

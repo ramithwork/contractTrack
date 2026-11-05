@@ -1,0 +1,421 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Hotel staff, manager, or administrator account profile with assigned department and role.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the user account",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username used for system login",
+          "maxLength": 64,
+          "minLength": 3
+        },
+        "email": {
+          "type": "string",
+          "description": "Work email address",
+          "maxLength": 128
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full staff name",
+          "maxLength": 100,
+          "minLength": 2
+        },
+        "role": {
+          "type": "string",
+          "description": "Role-based access tier",
+          "enum": ["admin", "manager", "staff"]
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "Department assigned to the user",
+          "maxLength": 64
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Name of assigned department",
+          "maxLength": 100
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Hotel extension or mobile number",
+          "maxLength": 30
+        },
+        "status": {
+          "type": "string",
+          "description": "Account status",
+          "enum": ["active", "inactive"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when account was created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when account was last updated"
+        }
+      },
+      "required": ["id", "username", "displayName", "role", "departmentId", "status"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Hotel departmental division (e.g. Food & Beverage, Engineering, Housekeeping).",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique ID of department",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Department title",
+          "maxLength": 100,
+          "minLength": 2
+        },
+        "code": {
+          "type": "string",
+          "description": "Departmental short code (e.g. FB, ENG, HK)",
+          "maxLength": 12,
+          "minLength": 2
+        },
+        "description": {
+          "type": "string",
+          "description": "Scope and operations overview",
+          "maxLength": 500
+        },
+        "headOfDepartment": {
+          "type": "string",
+          "description": "Name of the Department Head",
+          "maxLength": 100
+        },
+        "color": {
+          "type": "string",
+          "description": "Hex badge accent color",
+          "maxLength": 10
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Created date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated date"
+        }
+      },
+      "required": ["id", "name", "code"]
+    },
+    "Contract": {
+      "title": "Contract",
+      "description": "Legal vendor agreement, service level agreement, or supplier contract with renewal schedule.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique contract identifier",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Contract title or scope name",
+          "maxLength": 200,
+          "minLength": 3
+        },
+        "contractNumber": {
+          "type": "string",
+          "description": "Hotel contract reference tracking code",
+          "maxLength": 60,
+          "minLength": 3
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "Supplier, contractor, or vendor company name",
+          "maxLength": 150,
+          "minLength": 2
+        },
+        "vendorContact": {
+          "type": "string",
+          "description": "Contact person, phone, or email",
+          "maxLength": 200
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "Owning hotel department ID",
+          "maxLength": 64
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Owning department title",
+          "maxLength": 100
+        },
+        "tags": {
+          "type": "string",
+          "description": "JSON array or list of contract classification tags",
+          "maxLength": 1000
+        },
+        "contractType": {
+          "type": "string",
+          "description": "Category of contract (legacy)",
+          "maxLength": 50
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Effective start date (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "endDate": {
+          "type": "string",
+          "description": "Contract expiry date (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "renewalDate": {
+          "type": "string",
+          "description": "Target renewal decision date (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "noticePeriodDays": {
+          "type": "number",
+          "description": "Notice period required in days before renewal or termination"
+        },
+        "value": {
+          "type": "number",
+          "description": "Total agreement monetary value"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code (e.g. LKR, USD)",
+          "maxLength": 10
+        },
+        "status": {
+          "type": "string",
+          "description": "Current lifecycle status",
+          "enum": ["active", "pending_renewal", "under_review", "renewed", "terminated", "expired"]
+        },
+        "autoRenewal": {
+          "type": "boolean",
+          "description": "Whether contract automatically rolls over"
+        },
+        "reminderDays": {
+          "type": "string",
+          "description": "Comma-separated or JSON list of notification days before renewal",
+          "maxLength": 100
+        },
+        "assignedUserIds": {
+          "type": "string",
+          "description": "JSON array of user IDs authorized to view contract and receive notifications",
+          "maxLength": 2000
+        },
+        "assignedUserNames": {
+          "type": "string",
+          "description": "Display names of assigned reviewers",
+          "maxLength": 2000
+        },
+        "creatorId": {
+          "type": "string",
+          "description": "User ID of creator",
+          "maxLength": 128
+        },
+        "creatorName": {
+          "type": "string",
+          "description": "Name of staff who registered the contract",
+          "maxLength": 100
+        },
+        "keyTerms": {
+          "type": "string",
+          "description": "Summary of critical deliverables and penalty clauses",
+          "maxLength": 2000
+        },
+        "notes": {
+          "type": "string",
+          "description": "Internal administrative notes",
+          "maxLength": 2000
+        },
+        "attachmentName": {
+          "type": "string",
+          "description": "Reference file name or document identifier",
+          "maxLength": 200
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last modified timestamp"
+        }
+      },
+      "required": ["id", "title", "contractNumber", "vendorName", "departmentId", "startDate", "endDate", "renewalDate", "status", "creatorId"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "Audit trail logging user actions, contract updates, role changes, and alerts.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique log record ID",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Actor user ID",
+          "maxLength": 128
+        },
+        "userName": {
+          "type": "string",
+          "description": "Actor user display name",
+          "maxLength": 100
+        },
+        "userRole": {
+          "type": "string",
+          "description": "Actor role at time of action",
+          "maxLength": 50
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "Actor department ID",
+          "maxLength": 64
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Actor department title",
+          "maxLength": 100
+        },
+        "action": {
+          "type": "string",
+          "description": "Action type identifier",
+          "maxLength": 60
+        },
+        "details": {
+          "type": "string",
+          "description": "Human-readable summary of what changed",
+          "maxLength": 1000
+        },
+        "targetId": {
+          "type": "string",
+          "description": "ID of the target entity impacted",
+          "maxLength": 128
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "ISO timestamp of event occurrence"
+        }
+      },
+      "required": ["id", "userId", "userName", "action", "details", "timestamp"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "Renewal reminder or assignment notification dispatched to creator or assigned reviewers.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique notification ID",
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Recipient user ID",
+          "maxLength": 128
+        },
+        "contractId": {
+          "type": "string",
+          "description": "Related contract ID",
+          "maxLength": 128
+        },
+        "contractTitle": {
+          "type": "string",
+          "description": "Contract title",
+          "maxLength": 200
+        },
+        "contractNumber": {
+          "type": "string",
+          "description": "Contract reference number",
+          "maxLength": 60
+        },
+        "departmentName": {
+          "type": "string",
+          "description": "Department name",
+          "maxLength": 100
+        },
+        "renewalDate": {
+          "type": "string",
+          "description": "Date of contract renewal",
+          "maxLength": 20
+        },
+        "daysRemaining": {
+          "type": "number",
+          "description": "Days remaining until renewal deadline"
+        },
+        "type": {
+          "type": "string",
+          "description": "Urgency / notification type",
+          "enum": ["renewal_urgent", "renewal_upcoming", "assigned", "status_change"]
+        },
+        "title": {
+          "type": "string",
+          "description": "Notification subject line",
+          "maxLength": 150
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed notification text",
+          "maxLength": 500
+        },
+        "read": {
+          "type": "boolean",
+          "description": "Whether user acknowledged or read notification"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["id", "userId", "contractId", "title", "message", "read", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Hotel staff and administrator user accounts with department and role permissions."
+    },
+    "/departments/{departmentId}": {
+      "schema": {
+        "$ref": "#/entities/Department"
+      },
+      "description": "Hotel operational departments managing contracts."
+    },
+    "/contracts/{contractId}": {
+      "schema": {
+        "$ref": "#/entities/Contract"
+      },
+      "description": "Hotel supplier, service, and procurement contracts."
+    },
+    "/activity_logs/{logId}": {
+      "schema": {
+        "$ref": "#/entities/ActivityLog"
+      },
+      "description": "Immutable audit trails for administrative tracking and departmental reporting."
+    },
+    "/notifications/{notificationId}": {
+      "schema": {
+        "$ref": "#/entities/Notification"
+      },
+      "description": "Direct contract renewal and assignment alerts for contract creators and assigned members."
+    },
+    "/admins/{adminId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "Trusted administrative lookup document registry for RBAC verification."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold-primary: #c5a059;
+    --gold-light: #e6ca85;
+    --gold-dark: #8c6d2b;
+    --kandyan-bg: #120f0d;
+    --kandyan-card: #1c1815;
+    --kandyan-border: rgba(197, 160, 89, 0.25);
+  }
+
+  body {
+    background-color: #120f0d;
+    color: #f3efea;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, .font-royal {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Custom regal scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #14100e;
+}
+::-webkit-scrollbar-thumb {
+  background: #3d3128;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a059;
+}
+
+/* Luxury gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f5e1a4 0%, #d4af37 50%, #aa8222 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-silver-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-glow {
+  border-color: rgba(197, 160, 89, 0.35);
+  box-shadow: 0 0 15px rgba(197, 160, 89, 0.08);
+}

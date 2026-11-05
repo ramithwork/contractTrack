@@ -1,0 +1,111 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Entity Validations
+    function isValidDepartment(data) {
+      return data.keys().hasAll(['id', 'name', 'code']) &&
+        data.id is string && data.id.size() <= 64 &&
+        data.name is string && data.name.size() >= 1 && data.name.size() <= 100 &&
+        data.code is string && data.code.size() >= 1 && data.code.size() <= 20;
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['id', 'username', 'displayName', 'role', 'departmentId', 'status']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.username is string && data.username.size() >= 3 && data.username.size() <= 64 &&
+        data.displayName is string && data.displayName.size() >= 2 && data.displayName.size() <= 100 &&
+        data.role in ['admin', 'manager', 'staff'] &&
+        data.departmentId is string && data.departmentId.size() <= 64 &&
+        data.status in ['active', 'inactive'];
+    }
+
+    function isValidContract(data) {
+      return data.keys().hasAll(['id', 'title', 'contractNumber', 'vendorName', 'departmentId', 'startDate', 'endDate', 'renewalDate', 'status', 'creatorId']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.title is string && data.title.size() >= 3 && data.title.size() <= 200 &&
+        data.contractNumber is string && data.contractNumber.size() >= 3 && data.contractNumber.size() <= 60 &&
+        data.vendorName is string && data.vendorName.size() >= 2 && data.vendorName.size() <= 150 &&
+        data.departmentId is string && data.departmentId.size() <= 64 &&
+        data.startDate is string && data.startDate.size() <= 25 &&
+        data.endDate is string && data.endDate.size() <= 25 &&
+        data.renewalDate is string && data.renewalDate.size() <= 25 &&
+        data.status in ['active', 'pending_renewal', 'under_review', 'renewed', 'terminated', 'expired'] &&
+        data.creatorId is string && data.creatorId.size() <= 128;
+    }
+
+    function isValidActivityLog(data) {
+      return data.keys().hasAll(['id', 'userId', 'userName', 'action', 'details', 'timestamp']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId.size() <= 128 &&
+        data.userName is string && data.userName.size() <= 100 &&
+        data.action is string && data.action.size() <= 60 &&
+        data.details is string && data.details.size() <= 1000 &&
+        data.timestamp is string && data.timestamp.size() <= 50;
+    }
+
+    function isValidNotification(data) {
+      return data.keys().hasAll(['id', 'userId', 'contractId', 'title', 'message', 'read', 'createdAt']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.userId is string && data.userId.size() <= 128 &&
+        data.contractId is string && data.contractId.size() <= 128 &&
+        data.title is string && data.title.size() <= 150 &&
+        data.message is string && data.message.size() <= 500 &&
+        data.read is bool &&
+        data.createdAt is string && data.createdAt.size() <= 50;
+    }
+
+    // Admins registry
+    match /admins/{adminId} {
+      allow read, write: if true;
+    }
+
+    // Departments:
+    match /departments/{departmentId} {
+      allow read: if true;
+      allow create, update: if isValidId(departmentId) && isValidDepartment(incoming());
+      allow delete: if isValidId(departmentId);
+    }
+
+    // Users:
+    match /users/{userId} {
+      allow read: if true;
+      allow create, update: if isValidId(userId) && isValidUser(incoming());
+      allow delete: if isValidId(userId);
+    }
+
+    // Contracts:
+    match /contracts/{contractId} {
+      allow read: if true;
+      allow create, update: if isValidId(contractId) && isValidContract(incoming());
+      allow delete: if isValidId(contractId);
+    }
+
+    // Activity Logs:
+    match /activity_logs/{logId} {
+      allow read: if true;
+      allow create: if isValidId(logId) && isValidActivityLog(incoming());
+      allow update, delete: if false;
+    }
+
+    // Notifications:
+    match /notifications/{notificationId} {
+      allow read: if true;
+      allow create, update: if isValidId(notificationId) && isValidNotification(incoming());
+      allow delete: if isValidId(notificationId);
+    }
+  }
+}
