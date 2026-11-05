@@ -20,7 +20,7 @@ export default defineConfig(() => {
           'assets/aistudio/g_k_logo__2a517572.png',
         ],
         manifest: {
-          id: '/',
+          id: './',
           name: 'contractTrack - THE GRAND KANDYAN',
           short_name: 'contractTrack',
           description:
@@ -28,33 +28,39 @@ export default defineConfig(() => {
           theme_color: '#0e172a',
           background_color: '#120f0d',
           display: 'standalone',
-          start_url: '/',
-          scope: '/',
+          start_url: './',
+          scope: './',
           icons: [
             {
-              src: '/pwa-192x192.png',
+              src: 'pwa-192x192.png',
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-512x512.png',
+              src: 'pwa-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/pwa-maskable-512x512.png',
+              src: 'pwa-maskable-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
+            },
+            {
+              src: 'assets/contract_track_icon.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any',
             },
           ],
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,jpg,jpeg}'],
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-          navigateFallback: '/index.html',
+          navigateFallback: 'index.html',
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

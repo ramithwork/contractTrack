@@ -12,6 +12,7 @@ import {
 import { User, ContractNotification } from '../../types';
 import { PWAInstallButton } from '../pwa/PWAInstallButton';
 import { NotificationService } from '../../services/notificationService';
+import { getAssetUrl } from '../../utils/assets';
 
 interface NavbarProps {
   currentUser: User | null;
@@ -68,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* contractTrack App Icon */}
             <div className="relative flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#c5a059]/40 bg-[#1e1713] p-1 shadow-inner group-hover:border-[#c5a059] transition-all">
               <img
-                src="/assets/contract_track_icon.png"
+                src={getAssetUrl('assets/contract_track_icon.png')}
                 alt="contractTrack"
                 className="h-full w-full object-contain filter drop-shadow rounded-lg"
               />

@@ -10,6 +10,7 @@ import {
 } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase/config';
 import { Contract, ContractNotification, User } from '../types';
+import { getAssetUrl } from '../utils/assets';
 
 export class NotificationService {
   /**
@@ -43,9 +44,10 @@ export class NotificationService {
    * Dispatches a Desktop / Mobile native notification via Service Worker (works even when tab is backgrounded)
    */
   static async showNativeNotification(title: string, options: NotificationOptions = {}) {
-    const defaultOptions = {
-      icon: '/pwa-192x192.png',
-      badge: '/pwa-192x192.png',
+    const iconUrl = getAssetUrl('pwa-192x192.png');
+    const defaultOptions: NotificationOptions & { renotify?: boolean } = {
+      icon: iconUrl,
+      badge: iconUrl,
       tag: 'gk-contract-reminder',
       renotify: true,
       ...options,
@@ -152,7 +154,7 @@ export class NotificationService {
           if (this.isPermissionGranted()) {
             await this.showNativeNotification(title, {
               body: message,
-              data: { url: `/contract/${contract.id}` },
+              data: { url: getAssetUrl(`?contractId=${contract.id}`) },
             });
           }
         } catch (err) {

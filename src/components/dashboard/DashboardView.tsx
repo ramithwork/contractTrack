@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { Contract, Department, User } from '../../types';
 import { ContractService } from '../../services/contractService';
+import { getAssetUrl } from '../../utils/assets';
 
 interface DashboardViewProps {
   contracts: Contract[];
@@ -101,7 +102,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
         {/* Ambient background crest watermark */}
         <div className="pointer-events-none absolute -right-12 -bottom-16 w-64 h-64 opacity-5">
-          <img src="/assets/aistudio/g_k_logo__2a517572.png" alt="" className="w-full h-full object-contain" />
+          <img src={getAssetUrl('assets/aistudio/g_k_logo__2a517572.png')} alt="" className="w-full h-full object-contain" />
         </div>
       </div>
 

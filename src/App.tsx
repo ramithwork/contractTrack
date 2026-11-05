@@ -20,6 +20,7 @@ import { DepartmentService, INITIAL_DEPARTMENTS } from './services/departmentSer
 import { ContractService, INITIAL_SAMPLE_CONTRACTS } from './services/contractService';
 import { ActivityLogService } from './services/activityLogService';
 import { NotificationService } from './services/notificationService';
+import { getAssetUrl } from './utils/assets';
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -299,7 +300,7 @@ export default function App() {
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#120f0d] text-[#c5a059]">
         <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-[#c5a059]/40 bg-[#1c1815] p-2 shadow-2xl">
           <img
-            src="/assets/contract_track_icon.png"
+            src={getAssetUrl('assets/contract_track_icon.png')}
             alt="contractTrack"
             className="h-full w-full object-contain filter drop-shadow animate-pulse rounded-xl"
           />

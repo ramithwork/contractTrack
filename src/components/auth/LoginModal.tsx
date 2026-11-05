@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Lock, User as UserIcon, KeyRound, Eye, EyeOff } from 'lucide-react';
 import { UserService } from '../../services/userService';
 import { User } from '../../types';
+import { getAssetUrl } from '../../utils/assets';
 
 interface LoginModalProps {
   onLoginSuccess: (user: User) => void;
@@ -43,7 +44,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ onLoginSuccess }) => {
         <div className="text-center">
           <div className="mx-auto mb-3 flex h-20 w-20 items-center justify-center rounded-2xl border border-[#c5a059]/40 bg-[#251e19] p-1.5 shadow-xl overflow-hidden">
             <img
-              src="/assets/contract_track_icon.png"
+              src={getAssetUrl('assets/contract_track_icon.png')}
               alt="contractTrack Icon"
               className="h-full w-full object-contain filter drop-shadow rounded-xl"
             />
